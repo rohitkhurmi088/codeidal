@@ -31,26 +31,6 @@ app.use(express.static('assets'));
 
 //__________RENDER EJS templates___________________
 
-//home
-app.get('/', (req,res)=>{
-    return res.render('home',{
-        title:'HomePage'
-    });
-});
-
-//profile
-app.get('/profile', (req,res)=>{
-    return res.render('profile',{
-        title:'UserProfile'
-    });
-});
-
-//tweet
-app.get('/tweet', (req,res)=>{
-    return res.render('tweet',{
-        title:'Tweets'
-    });
-});
 
 
 
@@ -64,6 +44,12 @@ app.get('/tweet', (req,res)=>{
 
 
 //_________________ROUTES_____________________________
+
+//router for routes/index.js
+const routes = require('./routes/index');
+app.use('/',routes);
+//console.log('router loaded');
+
 
 
 
