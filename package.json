@@ -1,0 +1,25 @@
+{
+  "name": "mp1",
+  "version": "1.0.0",
+  "description": "social",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "social4"
+  ],
+  "author": "rk",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "mongod": "^2.0.0",
+    "mongodb": "^3.5.5",
+    "mongoose": "^5.9.7",
+    "path": "^0.12.7",
+    "uuid": "^7.0.3"
+  }
+}
