@@ -19,11 +19,13 @@ require('events').EventEmitter.prototype._MaxListeners=100;
 
 //ejs template engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname,'views'));
+//app.set('views', path.join(__dirname,'views'));
+app.set('views', './views');
 
 //body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
+
 
 //including css-static files(assets)
 app.use(express.static('assets'));
