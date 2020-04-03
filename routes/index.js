@@ -20,7 +20,7 @@ router.use('/routerName', require('./routerfile))
 ****/
 
 //profile
-router.use('/profile', require('./users'));
+router.use('/users', require('./users'));
 
 //tweet
 router.use('/tweet', require('./tweet'));
