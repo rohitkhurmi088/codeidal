@@ -8,7 +8,10 @@ const bodyParser = require('body-parser');
 const uuid = require('uuid');
 
 //__________MONGOdb setup___________________
- const db = require('./config/mongoose');
+const db = require('./config/mongoose'); //mongoose
+const User = require('./models/user'); //user Model
+
+
 
 //__________EXPRESS setup___________________
 const app = express();
