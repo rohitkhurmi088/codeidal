@@ -1,0 +1,25 @@
+<!--layout.ejs file must me kept in views only-->
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title> <%= locals.title %> </title>
+    <link rel="stylesheet" type="text/css" href="/css/layout.css">
+
+    <!--Styles from other ejsfiles-->
+    <%- style %>
+
+</head>
+<body>
+    <%- include('./partials/_header.ejs'); %>
+
+    <%- body %>
+    
+    <%- include('./partials/_footer.ejs'); %>
+
+    <!--Scriptsfrom other ejsfiles-->
+    <%- script %>
+</body>
+</html>
+
+

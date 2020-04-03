@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 8800;
 
+const expressLayouts = require('express-ejs-layouts');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
@@ -30,6 +31,12 @@ app.use(express.urlencoded({ extended:false }));
 //including css-static files(assets)
 app.use(express.static('assets'));
 
+//for layouts -put before routes
+app.use(expressLayouts)
+//extract style +script from subpages into layout
+//Eg: including home.ejs-css file in layout
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
 
 //__________RENDER EJS templates___________________
 
