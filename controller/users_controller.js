@@ -1,4 +1,4 @@
-//_________profile_controller_________
+//_________USER_controller_________
 
 module.exports.profile = (req,res)=>{
     return res.render('profile',{

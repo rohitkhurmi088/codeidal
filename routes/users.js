@@ -4,8 +4,8 @@ const express = require('express');
 const router = express.Router();
 
 //profile
-const profileController = require('../controller/profile_controller');
-router.get('/', profileController.profile);
+const usersController = require('../controller/users_controller');
+router.get('/', usersController.profile);
 
 /*
 ::NOTE:: use '/' here & use '/profile' in router->index.js ie main router for '/'
