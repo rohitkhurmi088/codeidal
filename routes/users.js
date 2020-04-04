@@ -15,6 +15,14 @@ router.get('/sign-up', usersController.signUp);
 router.get('/sign-in', usersController.signIn);
 
 
+//_____create User________(Post: signUp in form)
+router.post('/create', usersController.create);
+
+
+
+
+
+
 //exporting router
 module.exports = router;
 

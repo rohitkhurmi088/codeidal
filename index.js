@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 const PORT = process.env.PORT || 8800;
 
@@ -30,6 +31,8 @@ app.set('views', './views');
 app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 
+//cookie-parser
+app.use(cookieParser());
 
 //including css-static files(assets)
 app.use(express.static('assets'));
