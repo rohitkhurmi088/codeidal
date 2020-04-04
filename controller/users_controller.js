@@ -2,14 +2,35 @@
 //Importing User Model 
 const User = require('../models/user');
 
+
+//________________________________________________________________________
+//_____________ Show Profile(ONLY to Authenticated Users)__________________
 module.exports.profile = (req,res)=>{
-    return res.render('profile',{
-        title:'UserProfile'
-    });
+
+    //CHECK if cookies are present
+    if(req.cookies.user_id){
+        //find user- Model.findById() or Model.findOne()
+        User.findById(req.cookies.user_id, (err,user)=>{
+            //if user is not found - Goto Profile
+            if(user){
+                return res.render('profile', {
+                    title:'UserProfile',
+                    user:user
+                });
+            }
+            //if user is not found Goto signIn page again
+            return res.redirect('/users/sign-in');
+        });
+    }else{
+        return res.redirect('/users/sign-in');
+    }
 };
+//________________________________________________________________________
 
 
-//__________Render the SignIn | SignUp pages___________
+
+//________________________________________________________________________
+//__________Render the SignIn | SignUp pages______________________________
 
 //sign_in ACTION + make route for this
 module.exports.signIn = (req,res)=>{
@@ -24,6 +45,10 @@ module.exports.signUp = (req,res)=>{
         title:'Social | Register'
     });
 };
+//______________________________________________________________________________
+
+
+
 
 //________________________________________________________________________
 //_____________ SIGN UP (STEPS TO Create New User)________________________
@@ -66,6 +91,8 @@ module.exports.create = (req,res)=>{
 //_____________________________________________________________________________
 
 
+
+
 //________________________________________________________________________
 //_____________SIGN IN (STEPS TO Authenticate User)______________________
 //signIn existing user + create-session (Login)
@@ -95,27 +122,14 @@ module.exports.createSession = (req,res)=>{
         }
     });
 };
-  
+//________________________________________________________________________
       
        
        
-
-
-
-
-
-
-
-//LOGOUT
+//LOGOUT :::::CURRENTLY NOT WORKING/CREATED::::::
 module.exports.destroySession = (req,res)=>{
-
+    
 };
-
-
-
-
-
-
 
 
 

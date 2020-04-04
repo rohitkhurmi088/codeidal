@@ -21,6 +21,9 @@ router.post('/create', usersController.create);
 //_create User login-Session__(Post: signIn in form)
 router.post('/create-session', usersController.createSession);
 
+//_create User logout request__(GET: back to sign-in)
+router.get('/sign-out', usersController.destroySession);
+
 
 
 

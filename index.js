@@ -1,5 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const path = require('path');
 const PORT = process.env.PORT || 8800;
 
@@ -31,8 +32,18 @@ app.set('views', './views');
 app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 
-//cookie-parser
+//cookie-parser - secret a string or array used for signing cookies. 
 app.use(cookieParser());
+
+app.use(session({
+    key: 'user_sid',
+    secret: 'somerandonstuffs',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 600000
+    }
+}));
 
 //including css-static files(assets)
 app.use(express.static('assets'));
@@ -45,17 +56,7 @@ app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
 //__________RENDER EJS templates___________________
-
-
-
-
-
-
-
-
-
-
-
+/* done in controller --> controller.js files*/
 
 
 //_________________ROUTES_____________________________
@@ -64,14 +65,6 @@ app.set('layout extractScripts',true);
 const routes = require('./routes/index');
 app.use('/',routes);
 //console.log('router loaded');
-
-
-
-
-
-
-
-
 
 
 //________________PORT calling_________________________
