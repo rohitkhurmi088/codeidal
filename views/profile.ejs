@@ -1,0 +1,52 @@
+<link rel="stylesheet" type="text/css" href="/css/profile.css">
+
+<!--Profile image-->
+<img src="<%= user.avatar %>" alt="<%= user.name %>" width="100">
+
+<!--:::NOTE:::user:user 
+locals.user : displays current signed in user
+profile_users (Find user by id): user -> displays profile of the clicked userById 
+passed in profileAction in users_controller-->
+
+<!--___________________________________________________-->
+<!-- UPDATE a current:signed-in User Details(By a form)-->
+<!--___________________________________________________-->
+<!-- Match the id of currentSignedIn user & the clickedUser:to_view_Profile
+user.id : id of current signed-in user
+profile_user.id : id of the clicked profile user 
+**** If these id's matches *****
+Then Only Show Update Form: the user is able to update his Details:name,email
+Action = 'users/update/%=profile_user.id%' in router-> action='users/update/:id'
+  where id = req.params.id  
+  Pass value in input fields as the "%=profile_user.name/email%"  & submit:value="update"
+**** Else ***** show only User Details:name,email -->
+    
+    <% if(user.id == profile_user.id){ %>
+
+        <!-- Show Update Form: the user is able to update his Details:name,email-->
+        <p><strong>Update Details</strong></p>
+        <!--Note:: enctype="multipart/formdata" does not takes body parser directly-->
+        <form method="POST" enctype="multipart/form-data" action="/users/update/<%=profile_user.id%>">
+            <!--Pass value in input fields as the %=profile_user.name% or email -->
+            <input type="text" name="name" placeholder="New Name" value="<%= profile_user.name %>" required/><br>
+            <input type="email" name="email" placeholder="New Email" value="<%= profile_user.email %>" required/><br>
+
+            <!--FileUpload (Profile_pic)-->
+            <input type="file" name="avatar" placeholder="profile_picture"><br>
+
+            <!--Update Button-->
+            <input type ="submit" value="update">
+        </form>  
+
+    <%  }else{ %>
+
+        <!--Show only User Details:name,email-->
+        <p> Name:<%= profile_user.name %> </p>
+        <p> Email:<%= profile_user.email %> </p>
+
+    <% } %>
+    
+
+<Script type="text/javascript" src="/js/profile.js"></script>
+    
+

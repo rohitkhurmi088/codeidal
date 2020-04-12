@@ -1,0 +1,25 @@
+#layout-footer{
+    
+    color: white;
+    a{
+        color: white;
+        text-decoration: none;
+    }
+
+    background: grey;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: flex-start;
+    
+    //making footer stick to the bottom
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+
+    .footer-nav{
+        ul{
+            list-style: none;
+        }
+    }
+}

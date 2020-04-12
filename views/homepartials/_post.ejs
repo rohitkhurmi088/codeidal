@@ -1,0 +1,76 @@
+<!--Add id to post list item(used for deleting li)
+    id="post-<%post._id%>"
+    in the view(template)- it does not matter if you are using
+    .id or _.id (if you are displaying),unless you are comparing -->
+<li id="post-<%=post._id%>">
+    <p>
+        <!--___________________-->
+        <!--Deleting the Post-->
+        <!--___________________-->
+        <!-- If user is there (signed-in) 
+            & to check the user who has created the post is same as the user who is signed-in
+             then only show DELTE button (X) 
+             locals.user.id : id of signedIn user 
+             post.user.id : id of create post user -->
+        <% if(locals.user && locals.user.id == post.user.id){ %>
+            <small>
+                <!-- use post._id or post.id-->
+                <!--Add a class to delete button<a class="delete-post-button">:
+                 Event Listners + style-->
+                <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
+            </small>
+        <% } %>
+   
+    <!--_____________________________________-->
+    <!--Showing Posts + UserName-->
+    <!--____________________________________-->
+    
+        <%= post.content %>
+        <!--Without Populating--> 
+        <!--Note:: <%=post.user%> : shows user _id :not name-->
+        <!--with Populating 'user' object-->
+        <br>
+        <Small> <%= post.user.name %> </Small>
+        
+    </p>
+    
+    <!--______________________________________________-->
+     <!--FORM to create Comments (for particular post)-->
+    <!--______________________________________________-->
+    <div class="post-comments">
+        <!-- Making Form to create Comment: visibe to only Signed-in Users-->
+        <!--1st at local level -> locals.user (only signed in user should be able to see the Form to Comment)-->
+        <% if(locals.user){ %>
+            <!--Note:FORM action="router action"-->
+            <!-- Include PostId in Form Id:
+                id="post-<%=post.id%>-comments-form" for AJAX-->
+            <form id="post-<%=post._id%>-comments-form" action="/comments/create" method="POST">
+                <input type="text" name="content" placeholder="Add comment" required>
+
+                <!--::::::::NOTE::::::::::-->
+                <!--We need to send the post._id of the post to which comment need to be added
+                    Either we can allow user to send that
+                    Or we can place it in a hidden input-->
+                <input type="hidden" name="post" value="<%=post._id%>">
+
+                <input type="submit" value="Add Comment">
+            </form>
+        <% } %>
+
+        <!--_____________________________________-->
+        <!--Showing Comments + UserName-->
+        <!--____________________________________-->
+        <div class="post-comments-list">
+            <ul id="post-comments-<%= post._id %>">
+                <!-- post->Array(comments)-->
+                <% for(comment of post.comments){ %>
+                    
+                    <!--including comment partials:in same folder as _post partials-->
+                    <%- include('_comment.ejs'); %>
+
+                <% } %>
+            </ul>
+        </div>
+        
+    </div>
+</li>

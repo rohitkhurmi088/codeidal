@@ -1,0 +1,80 @@
+<!--layout.ejs file must me kept in views only-->
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title> <%=locals.title%></title>
+
+    <!--CSS/script files for NotyJS(Animated flash Messages)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+    
+    <!--Jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    
+    <!--CSS FILES for header/footer/layout.ejs-->
+    <link rel="stylesheet" type="text/css" href="/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/_header.css">
+    <link rel="stylesheet" type="text/css" href="/css/_footer.css">
+
+    <!--Styles from other ejsfiles-->
+    <%- style %>
+
+</head>
+<body>
+    
+    <!--Header-->
+    <%- include('./partials/_header.ejs'); %>
+    
+    <!-- ::::: Simple flash message:::::
+        Now 'locals' has a flash
+        if flash is successfull & flash has a message display flash-->
+    <!--<% if(flash.success && flash.success.length>0){ %>-->
+        <!--display flash message
+            <h5> <%= flash.success%> </h5>
+    <%}%> -->
+    
+    <!--Main-Content-section-->
+    <main id="layout-main">
+        <%- body %>
+    </main>
+    
+    <!--Footer-->
+    <%- include('./partials/_footer.ejs'); %>
+
+    <!--Scriptsfrom other ejsfiles-->
+    <%- script %>
+    
+    <!--Notyjs Script(js)::Animated Flash Message-->
+    <script>
+        /*::::: Notyjs Animated message:::::
+        Now 'locals' has a flash
+        if flash is successfull & flash has a message display flash */
+
+        //Success 
+        <%if(flash.success && flash.success.length>0){%>
+            new Noty({
+                text: "<%= flash.success%>",
+                theme: 'relax',
+                type: 'success', //type defined in 
+                layout: 'topRight', //where to display
+                timeout:1500 //millisec
+            }).show();
+        <%}%>
+
+        //Error
+        <%if(flash.error && flash.error.length>0){%>
+            new Noty({
+                text: "<%= flash.error%>",
+                theme: 'relax',
+                type: 'success', //type defined in 
+                layout: 'topRight', //where to display
+                timeout:1500 //millisec
+            }).show();
+        <%}%>
+    </script>
+    
+</body>
+</html>
+
+

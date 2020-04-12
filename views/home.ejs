@@ -1,0 +1,77 @@
+<link rel="stylesheet" type="text/css" href="/css/home.css">
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<div id="home-container">
+    
+    <Section id ="f-section">
+        <p>1st section</p>
+    </Section>
+
+    <!--____________________________________-->
+    <!-- Create Form Posts/comments on Homepage -->
+    <!--____________________________________-->
+    <section id="feed-posts">
+        <h4>Posts</h4>
+        <!--_____________________________________-->
+             <!--FORM to create Posts-->
+        <!--____________________________________-->
+        <!-- Making Form to create Post: visibe to only Signed-in Users
+        User will be able to only read Posts before Signed-in-->
+        <!--1st at local level -> locals.user (only signed in user should be able to see the Form to Post)-->
+        <% if(locals.user){ %>
+            <!--Note:FORM action="router action"-->
+            <!-- id="new-post-form" for AJAX-->
+            <form action="/posts/create" id="new-post-form" method="POST">
+                <!-- (textarea for content /not users) -->
+                <textarea name="content" rows="3" cols="30" placeholder="Type Here..." required></textarea>
+                <input type="submit" value="Post">
+            </form>
+        <% } %>  
+            
+        <!--_____________________________________-->
+               <!--POSTING Content-->
+        <!--____________________________________-->
+        <div id="posts-list-container">
+            <ul>
+                <% for(post of posts){ %>
+                <!--including _post-partials from folder: homepartials-->
+                    <%- include('./homepartials/_post.ejs'); %>
+                <% } %>
+            </ul>
+        </div>
+    </section>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->    
+    
+    <!--___________________________________________________-->
+    <!-- Display list of All the users from home_controller -->
+    <!--___________________________________________________-->
+    <Section id ="user-friends">
+        <h4>Friends</h4>
+
+        <!-- in home_controller we passed 'all_users:users'-->
+        <% for(u of all_users){ %>
+            <p>
+                <!--displaying list of user with link(only  when signed-in)to the profile page-->
+                <!--___________________________________________________________________________-->
+                <!--users/profile: displays current user's profile
+                users/profile/<%=u.id%> : diplays the profile of the clicked user
+                ->pass/update this id in the users.js -> profile-router as /users/profile/:id ::String Params
+                here u = variable passed in loop to display user's list or any user --> 
+                <a href="/users/profile/<%=u.id%>">
+                    <%=u.name%> <!--name of the users-->
+                </a>
+            </p>
+        <% } %>
+    </Section>
+
+</div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+
+<!-- importing this script for creating the posts/comments using AJAX -->
+<Script type="text/javascript" src="/js/home_comments.js"></script>
+<Script type="text/javascript" src="/js/home_posts.js"></script>

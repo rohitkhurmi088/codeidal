@@ -1,0 +1,32 @@
+<!--Add id to comment list item(used for deleting li)
+    id="post-<%post._id%>"
+    in the view(template)- it does not matter if you are using
+    .id or _.id (if you are displaying),unless you are comparing -->
+<li id="comment-<%= comment._id %>">
+    <p>
+        <!--___________________-->
+        <!--Deleting the Comment-->
+        <!--___________________-->
+        <!-- If user is there (signed-in) 
+            & to check the user who has created the comment is same as the user who is signed-in
+                then only show DELTE button (X) 
+                locals.user.id : id of signedIn user 
+                comment.user.id : id of create comment user -->
+        <% if(locals.user && locals.user.id == comment.user.id){ %>
+                <small>
+                <!-- use comment._id or comment.id -->
+                <!--Add a class to delete button<a class="delete-comment-button">:
+                 Event Listners + style-->
+                    <a class="delete-comment-button" href="/comments/destroy/<%= comment.id %>">X</a>
+                </small>
+        <% } %>
+            
+        <!--_____________________________________-->
+        <!--Showing Comment + UserName-->
+        <!--____________________________________-->
+        <%= comment.content %>
+         <!--with NESTED Populating 'user','comments'-->
+        <br>
+        <Small> <%= comment.user.name %> </Small>
+    </p>
+</li>
